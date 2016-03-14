@@ -1,0 +1,19 @@
+{
+  "name": "coursera_node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/igormicael/coursera_node.git"
+  },
+  "author": "igor micael",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/igormicael/coursera_node/issues"
+  },
+  "homepage": "https://github.com/igormicael/coursera_node#readme"
+}
