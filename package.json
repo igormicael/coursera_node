@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/igormicael/coursera_node/issues"
   },
-  "homepage": "https://github.com/igormicael/coursera_node#readme"
+  "homepage": "https://github.com/igormicael/coursera_node#readme",
+  "dependencies": {
+    "yargs": "^4.3.1"
+  }
 }
