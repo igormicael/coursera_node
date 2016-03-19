@@ -1,15 +1,15 @@
 var express = require('express');
-
-//log on server side
 var morgan = require('morgan');
+var dishRouter = require('./dishRouter');
 
 var hostname = 'localhost';
 var port = 3000;
 
 var app = express();
 
-//middleware
 app.use(morgan('dev'));
+
+app.use('/dishes',dishRouter);
 
 app.use(express.static(__dirname + '/public'));
 
