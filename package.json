@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/igormicael/coursera_node#readme",
   "dependencies": {
+    "express": "^4.13.4",
+    "morgan": "^1.7.0",
     "yargs": "^4.3.1"
   }
 }
