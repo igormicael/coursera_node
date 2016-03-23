@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/igormicael/coursera_node#readme",
   "dependencies": {
+    "assert": "^1.3.0",
     "body-parser": "^1.15.0",
     "express": "^4.13.4",
+    "mongodb": "^2.1.11",
     "morgan": "^1.7.0",
     "yargs": "^4.3.1"
   }
