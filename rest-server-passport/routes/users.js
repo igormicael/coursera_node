@@ -4,9 +4,16 @@ var passport = require('passport');
 var User = require('../models/user');
 var Verify = require('./verify');
 
+var bodyParser = require('body-parser');
+
+router.use(bodyParser.json());
+
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-    res.send('respond with a resource');
+router.get('/',Verify.verifyAdmin , function(req, res, next) {
+    User.find({}, function(err, user) {
+        if (err) throw err;
+        res.json(user);
+    });
 });
 
 router.post('/register', function(req, res) {
