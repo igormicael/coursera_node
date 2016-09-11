@@ -33,7 +33,6 @@ app.all('*', function(req, res, next) {
     if (req.secure) {
         return next();
     };
-
     res.redirect('https://' + req.hostname + ':' + app.get('secPort') + req.url);
 });
 
@@ -91,6 +90,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;

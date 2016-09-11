@@ -11,13 +11,13 @@ leaderRouter.use(bodyParser.json());
 leaderRouter.route('/')
     .get(Verify.verifyOrdinaryUser, function(req, res, next) {
         Leaders.find({}, function(err, leader) {
-            if (err) throw err;
+            if (err) next (err);
             res.json(leader);
         });
     })
     .post(Verify.verifyAdmin, function(req, res, next) {
         Leaders.create(req.body, function(err, leader) {
-            if (err) throw err;
+            if (err) next (err);
             console.log('Leader created!');
             var id = leader._id;
 
@@ -27,7 +27,7 @@ leaderRouter.route('/')
     })
     .delete(Verify.verifyAdmin, function(req, res, next) {
         Leaders.remove({}, function(err, resp) {
-            if (err) throw err;
+            if (err) next (err);
             res.json(resp);
         });
     });
@@ -36,7 +36,7 @@ leaderRouter.route('/')
 leaderRouter.route('/:leaderId')
     .get(Verify.verifyOrdinaryUser, function(req, res, next) {
         Leaders.findById(req.params.leaderId, function(err, leader) {
-            if (err) throw err;
+            if (err) next (err);
             res.json(leader);
         });
     })
@@ -46,13 +46,13 @@ leaderRouter.route('/:leaderId')
         }, {
             new: true
         }, function(err, leader) {
-            if (err) throw err;
+            if (err) next (err);
             res.json(leader);
         });
     })
     .delete(Verify.verifyAdmin, function(req, res, next) {
         Leaders.findByIdAndRemove(req.params.leaderId, function(err, resp) {
-            if (err) throw err;
+            if (err) next (err);
             res.json(resp);
         });
     });

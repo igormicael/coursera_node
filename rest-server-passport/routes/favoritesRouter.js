@@ -9,21 +9,20 @@ var favoritesRouter = express.Router();
 favoritesRouter.use(bodyParser.json());
 
 favoritesRouter.route('/')
-    .all(Verify.verifyOrdinaryUser)
     .get(function(req, res, next) {
 
         Favorites.find({})
             .populate('postedBy')
             .populate('dishes')
             .exec(function(err, favorite) {
-                if (err) throw err;
+                if (err) next (err);
 
                 res.json(favorite);
             })
     })
-    .post(Verify.verifyAdmin, function(req, res, next) {
+    .post(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next) {
         Favorites.findOne({ "postedBy": req.decoded._doc._id }, function(err, favorite) {
-            if (err) throw err;
+            if (err) next (err);
 
             if (favorite) {
 
@@ -53,21 +52,20 @@ favoritesRouter.route('/')
 
     })
 
-.delete(Verify.verifyAdmin, function(req, res, next) {
+.delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next) {
     Favorites.findOneAndRemove({"postedBy": req.decoded._doc._id}, function(err, favorite) {
-        if (err) throw err;
+        if (err) next (err);
         res.json(favorite);
     });
 });
 
 favoritesRouter.route('/:dishId')
-    .all(Verify.verifyOrdinaryUser)
-    .delete(Verify.verifyAdmin, function(req, res, next) {
+    .delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next) {
         var dishId = req.params.dishId;
         var postedById = req.decoded._doc._id;
 
         Favorites.findOne({ "postedBy": postedById }, function(err, favorite) {
-            if (err) throw err;
+            if (err) next (err);
 
             for (var i = (favorite.dishes.length - 1); i >= 0; i--) {
                 if (favorite.dishes[i] == dishId) {
@@ -76,7 +74,7 @@ favoritesRouter.route('/:dishId')
             }
 
             favorite.save(function(err, result) {
-                if (err) throw err;
+                if (err) next (err);
                 res.json(favorite);
             });
         });
