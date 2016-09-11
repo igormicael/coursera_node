@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var authenticate = require('./authenticate');
+var cors = require('cors');
 
 var config = require('./config');
 
@@ -26,6 +27,8 @@ var promotions = require('./routes/promoRouter');
 var favorites = require('./routes/favoritesRouter');
 
 var app = express();
+
+app.use(cors());
 
 // Secure traffic only
 app.all('*', function(req, res, next) {
